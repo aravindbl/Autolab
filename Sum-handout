@@ -1,0 +1,57 @@
+Sum-handout/0000777000175000017500000000000013554224470013247 5ustar  xtrkilxtrkilSum-handout/Makefile0000666000175000017500000000013413540570326014704 0ustar  xtrkilxtrkil# Student makefile for the Hello Lab
+all: 
+	gcc Sum.c -o Sum
+
+clean:
+	rm -rf *~ Sum
+
+
+Sum-handout/README0000666000175000017500000000070713540570326014132 0ustar  xtrkilxtrkilFor this lab, you should write a tiny C program, called "Sum.c",
+that prints "hello, world" to stdout and then indicates success by
+exiting with a status of zero.
+
+To test your work: 
+linux> make clean; make; ./Sum
+
+To run the same autograder that Autolab will use when you submit:
+linux> ./driver.sh
+
+Files:
+README          This file
+Makefile        Compiles hello.c
+driver.sh       Autolab autograder
+hello.c         Empty C file that you will edit
+Sum-handout/driver.sh0000777000175000017500000000140713540570326015102 0ustar  xtrkilxtrkil#!/bin/bash
+
+# driver.sh - The simplest autograder we could think of. It checks
+#   that students can write a C program that compiles, and then
+#   executes with an exit status of zero.
+#   Usage: ./driver.sh
+
+# Compile the code
+echo "Compiling Sum.c"
+(make clean; make)
+status=$?
+if [ ${status} -ne 0 ]; then
+    echo "Failure: Unable to compile hello.c (return status = ${status})"
+    echo "{\"scores\": {\"Sum\": 0}}"
+    exit
+fi
+
+# Run the code
+echo "Running ./Sum"
+./Sum
+status=$?
+if [ ${status} -eq 0 ]; then
+    echo "Success: ./hello runs with an exit status of 0"
+    echo "{\"scores\": {\"Sum\": 20}}"
+else
+    echo "Failure: ./hello fails or returns nonzero exit status of ${status}"
+    echo "{\"scores\": {\"Sum\": 0}}"
+fi
+
+exit
+
+Sum-handout/Sum.c0000666000175000017500000000002613540570326014513 0ustar  xtrkilxtrkil/* 
+ * Hello Lab 
+ */
